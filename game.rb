@@ -4,6 +4,7 @@ require "gosu"
 
 require_relative "core/car"
 require_relative "core/taxi"
+require_relative "core/world"
 require_relative "core/window"
 
 window = GameWindow.new
