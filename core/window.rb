@@ -11,6 +11,7 @@ class GameWindow < Gosu::Window
     super 640, 480, false
     self.caption = 'Taxi Game'
     @world = World.new(self)
+    @world.start
   end
 
   #draw
