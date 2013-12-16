@@ -7,8 +7,8 @@
 #Driver
 class Driver < Car
 
-  def initialize window, x, y
-    super window, x, y, "images/car.png"
+  def initialize window, x, y, img
+    super window, x, y, img
   end
 
 end

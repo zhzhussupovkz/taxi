@@ -7,6 +7,8 @@
 #GameWindow
 class GameWindow < Gosu::Window
 
+  include Singleton
+
   def initialize
     super 640, 480, false
     self.caption = 'Taxi Game'
