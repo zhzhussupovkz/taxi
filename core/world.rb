@@ -13,7 +13,7 @@ class World
     @road = Gosu::Image.new(window,'images/road.png', true)
     @board = Board.new(window)
     @taxi = Taxi.new(window, 250, 425)
-    @trees, @houses = [], []
+    @trees, @houses, @drivers = [], [], []
     @himg = [1, 2, 3, 4]
   end
 
@@ -29,6 +29,11 @@ class World
       num = @himg.sample
       @houses << House.new(window, 370, i, "images/houses/house_" + num.to_s + ".png")
     end
+    (10..600).step(150) do |i|
+      coord = rand(135..185)
+      model = ["car_1", "car_2"].sample
+      @drivers << Driver.new(window, coord, i, "images/" + model + ".png")
+    end
   end
 
   #draw
@@ -38,6 +43,7 @@ class World
     @road.draw(120, 360, 1)
     @trees.each do |e| e.draw end
     @houses.each do |e| e.draw end
+    @drivers.each do |e| e.draw end
     @taxi.draw
     @board.draw
   end
@@ -49,6 +55,7 @@ class World
     @taxi.go if window.button_down? Gosu::KbUp
     @taxi.brake if window.button_down? Gosu::KbDown
     @taxi.beep if window.button_down? Gosu::KbSpace
+    @drivers.each do |e| e.move_down end
     @taxi.move
   end
   

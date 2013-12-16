@@ -5,6 +5,7 @@ require "singleton"
 
 require_relative "core/objects/car"
 require_relative "core/objects/taxi"
+require_relative "core/objects/driver"
 require_relative "core/objects/tree"
 require_relative "core/objects/house"
 require_relative "core/world"

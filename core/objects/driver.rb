@@ -11,5 +11,10 @@ class Driver < Car
     super window, x, y, img
   end
 
+  def move_down
+    @y += 2.5
+    @y = 0 if @y >= 480
+  end
+
 end
 
