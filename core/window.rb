@@ -13,8 +13,11 @@ class GameWindow < Gosu::Window
     super 640, 480, false
     self.caption = 'Taxi Game'
     @world = World.new(self)
+    @st = Time.now.to_i
     @world.start
   end
+
+  attr_reader :st
 
   #draw
   def draw
