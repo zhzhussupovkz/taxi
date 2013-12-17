@@ -10,12 +10,18 @@ class Tree
   def initialize window, x, y
     @window = window
     @x, @y = x, y
-    @img = Gosu::Image.new(window, "images/tree.png", false)
+    @img = Gosu::Image.new(window, "images/houses/tree.png", false)
   end
 
   #draw
   def draw
     @img.draw(@x, @y, 2)
+  end
+
+  #move
+  def move
+    @y += 3.0
+    @y = 0 if @y >= 480
   end
 
 end

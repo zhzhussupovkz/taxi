@@ -18,5 +18,11 @@ class House
     @img.draw(@x, @y, 2)
   end
 
+  #move
+  def move
+    @y += 3.0
+    @y = 0 if @y >= 480
+  end
+
 end
 

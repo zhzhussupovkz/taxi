@@ -8,7 +8,7 @@
 class Taxi < Car
 
   def initialize window, x, y
-    super window, x, y, "images/taxi.png"
+    super window, x, y, "images/cars/taxi.png"
     @fuel, @damage, @money, @lives, @score = 100, 100, 200, 3, 0
     @ui = Gosu::Font.new(window, 'Monaco', 25)
     @beep = Gosu::Song.new(window, 'sounds/beep.ogg')
@@ -33,6 +33,16 @@ class Taxi < Car
   #beep
   def beep
     @beep.play(looping = false)
+  end
+
+  #driving
+  def driving
+    move_left if window.button_down? Gosu::KbLeft
+    move_right if window.button_down? Gosu::KbRight
+    go if window.button_down? Gosu::KbUp
+    brake if window.button_down? Gosu::KbDown
+    beep if window.button_down? Gosu::KbSpace
+    move
   end
 
 end

@@ -9,8 +9,8 @@ class World
 
   def initialize window
     @window = window
-    @bg = Gosu::Image.new(window, 'images/green.png', true)
-    @road = Gosu::Image.new(window,'images/road.png', true)
+    @bg = Gosu::Image.new(window, 'images/env/green.png', true)
+    @road = Gosu::Image.new(window,'images/env/road.png', true)
     @board = Board.new(window)
     @taxi = Taxi.new(window, 250, 425)
     @trees, @houses, @drivers = [], [], []
@@ -21,9 +21,9 @@ class World
 
   #start
   def start
-    (10..500).step(100) do |i| @trees << Tree.new(window, 75, i) end
+    (10..500).step(100) do |i| @trees << Tree.new(window, 80, i) end
     (10..500).step(100) do |i| @trees << Tree.new(window, 325, i) end
-    (20..550).step(100) do |i|
+    (20..500).step(100) do |i|
       num = @himg.sample
       @houses << House.new(window, 25, i, "images/houses/house_" + num.to_s + ".png")
       num = @himg.sample
@@ -32,7 +32,7 @@ class World
     (10..600).step(150) do |i|
       coord = rand(135..185)
       model = ["car_1", "car_2"].sample
-      @drivers << Driver.new(window, coord, i, "images/" + model + ".png")
+      @drivers << Driver.new(window, coord, i, "images/cars/" + model + ".png")
     end
   end
 
@@ -50,13 +50,10 @@ class World
 
   #update
   def update
-    @taxi.move_left if window.button_down? Gosu::KbLeft
-    @taxi.move_right if window.button_down? Gosu::KbRight
-    @taxi.go if window.button_down? Gosu::KbUp
-    @taxi.brake if window.button_down? Gosu::KbDown
-    @taxi.beep if window.button_down? Gosu::KbSpace
     @drivers.each do |e| e.move_down end
-    @taxi.move
+    @houses.each do |e| e.move end if window.button_down? Gosu::KbUp
+    @trees.each do |e| e.move end if window.button_down? Gosu::KbUp
+    @taxi.driving
   end
   
 end
