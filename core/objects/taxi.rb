@@ -30,6 +30,12 @@ class Taxi < Car
     @acc.play(looping = true)
   end
 
+  #brake
+  def brake
+    super
+    @acc.stop
+  end
+
   #beep
   def beep
     @beep.play(looping = false)

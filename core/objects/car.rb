@@ -28,7 +28,7 @@ class Car
 
   #accelerate
   def go
-    @y -= 5.0 if @y >= 10.0
+    @y -= 5.0 if @y >= 200.0
   end
 
   #brake
