@@ -14,21 +14,33 @@ class World
     @board = Board.new(window)
     @taxi = Taxi.new(window, 250, 425)
     @trees, @houses, @drivers = [], [], []
-    @himg = [1, 2, 3, 4]
   end
 
   attr_reader :window, :trees
 
   #start
   def start
+    gen_houses
+    gen_trees
+    gen_drivers
+  end
+
+  #generate houses
+  def gen_houses
+    (20..500).step(100) do |i|
+      @houses << House.new(window, 25, i)
+      @houses << House.new(window, 370, i)
+    end
+  end
+
+  #generate trees
+  def gen_trees
     (10..500).step(100) do |i| @trees << Tree.new(window, 80, i) end
     (10..500).step(100) do |i| @trees << Tree.new(window, 325, i) end
-    (20..500).step(100) do |i|
-      num = @himg.sample
-      @houses << House.new(window, 25, i, "images/houses/house_" + num.to_s + ".png")
-      num = @himg.sample
-      @houses << House.new(window, 370, i, "images/houses/house_" + num.to_s + ".png")
-    end
+  end
+
+  #generate drivers
+  def gen_drivers
     (10..600).step(150) do |i|
       coord = rand(135..185)
       model = ["car_1", "car_2"].sample

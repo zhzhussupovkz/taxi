@@ -7,10 +7,11 @@
 #House
 class House
 
-  def initialize window, x, y, img
+  def initialize window, x, y
     @window = window
     @x, @y = x, y
-    @img = Gosu::Image.new(window, img, false)
+    png = ["1.png", "2.png", "3.png", "4.png"].sample
+    @img = Gosu::Image.new(window, "images/houses/house_" + png, false)
   end
 
   #draw
