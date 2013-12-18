@@ -10,7 +10,7 @@ class World
   def initialize window
     @window = window
     @bg = Gosu::Image.new(window, 'images/env/green.png', true)
-    @road = Gosu::Image.new(window,'images/env/road.png', true)
+    @road = Road.new(window, 120, 0)
     @board = Board.new(window)
     @taxi = Taxi.new(window, 250, 425)
     @trees, @houses, @drivers = [], [], []
@@ -51,8 +51,7 @@ class World
   #draw
   def draw
     @bg.draw(0, 0, 0)
-    @road.draw(120, 0, 1)
-    @road.draw(120, 360, 1)
+    @road.draw
     @trees.each do |e| e.draw end
     @houses.each do |e| e.draw end
     @drivers.each do |e| e.draw end

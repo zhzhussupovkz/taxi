@@ -3,6 +3,7 @@
 require "gosu"
 require "singleton"
 
+require_relative "core/objects/road"
 require_relative "core/objects/car"
 require_relative "core/objects/taxi"
 require_relative "core/objects/driver"
