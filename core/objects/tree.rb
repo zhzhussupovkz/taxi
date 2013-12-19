@@ -10,7 +10,8 @@ class Tree
   def initialize window, x, y
     @window = window
     @x, @y = x, y
-    @img = Gosu::Image.new(window, "images/houses/tree.png", false)
+    png = ['tree.png', 'tree_1.png'].sample
+    @img = Gosu::Image.new(window, "images/houses/" + png, false)
   end
 
   #draw
