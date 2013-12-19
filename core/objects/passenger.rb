@@ -7,15 +7,15 @@
 #Passenger
 class Passenger
 
-  def initialize window, x, y
-    @window, @x, @y = window, x, y
+  def initialize world, x, y
+    @world, @x, @y = world, x, y
     png = ["boy.png", "girl.png"].sample
-    @img = Gosu::Image.new(window, "images/passengers/" + png, false)
+    @img = Gosu::Image.new(@world.window, "images/passengers/" + png, false)
     @distance = rand(1000..5000)
-    @drawing = true
+    @drawing = false
   end
 
-  attr_accessor :drawing
+  attr_accessor :drawing, :x, :y
 
   #draw
   def draw
@@ -25,7 +25,17 @@ class Passenger
   #move
   def move
     @y += 3.0
-    @y = 0 if @y >= 480
+    if @y >= 480
+      @drawing = false
+      change
+      @world.taxi.last_trip = Time.now.to_i
+    end
+  end
+
+  #change pass
+  def change
+    png = ["boy.png", "girl.png"].sample
+    @img = Gosu::Image.new(@world.window, "images/passengers/" + png, false)
   end
   
 end

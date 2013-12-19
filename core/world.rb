@@ -13,10 +13,11 @@ class World
     @road = Road.new(window, 120, 0)
     @board = Board.new(window)
     @taxi = Taxi.new(window, 250, 425)
+    @pass = Passenger.new(self, 347.5, 0)
     @trees, @houses, @drivers = [], [], []
   end
 
-  attr_reader :window, :trees
+  attr_reader :window, :trees, :taxi
 
   #start
   def start
@@ -57,6 +58,7 @@ class World
     @drivers.each do |e| e.draw end
     @taxi.draw
     @board.draw
+    @pass.draw
   end
 
   #update
@@ -64,7 +66,16 @@ class World
     @drivers.each do |e| e.move_down end
     @houses.each do |e| e.move end if window.button_down? Gosu::KbUp
     @trees.each do |e| e.move end if window.button_down? Gosu::KbUp
+    @pass.move if window.button_down? Gosu::KbUp
     @taxi.driving
+    if not @taxi.pass
+      curr = @taxi.last_trip
+      time = rand(curr + 3..curr + 120)
+      if (time == Time.now.to_i)
+        @pass.y = taxi.y - 100
+        @pass.drawing = true
+      end
+    end
   end
   
 end

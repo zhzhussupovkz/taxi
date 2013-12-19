@@ -13,7 +13,12 @@ class Taxi < Car
     @ui = Gosu::Font.new(window, 'Monaco', 25)
     @beep = Gosu::Song.new(window, 'sounds/beep.ogg')
     @acc = Gosu::Song.new(window, 'sounds/cars.ogg')
+    @pass = false
+    @last_trip = Time.now.to_i
   end
+
+  attr_accessor :pass, :last_trip
+  attr_reader :x, :y
 
   #draw
   def draw
