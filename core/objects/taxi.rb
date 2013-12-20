@@ -38,7 +38,14 @@ class Taxi < Car
     if (@distance % 1000 == 0)
       @score += 100 if @pass == true
       @fuel -= 2.0
-      @money += 10 if @pass == true
+      if @pass == true
+        @money += 10
+        window.world.pass.cab_ride
+      end
+    end
+    if window.world.pass.distance == 0
+      @pass = false
+      window.world.pass.update_dist
     end
   end
 

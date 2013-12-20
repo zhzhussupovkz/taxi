@@ -17,7 +17,7 @@ class World
     @trees, @houses, @drivers = [], [], []
   end
 
-  attr_reader :window, :trees, :taxi
+  attr_reader :window, :trees, :taxi, :pass
 
   #start
   def start

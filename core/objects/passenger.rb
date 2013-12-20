@@ -11,7 +11,7 @@ class Passenger
     @world, @x, @y = world, x, y
     png = ["boy.png", "girl.png"].sample
     @img = Gosu::Image.new(@world.window, "images/passengers/" + png, false)
-    @distance = rand(10000..50000)
+    @distance = rand(5000..10000)
     @drawing = false
   end
 
@@ -35,9 +35,19 @@ class Passenger
 
   #change pass
   def change
-    @distance = rand(10000..50000)
     png = ["boy.png", "girl.png"].sample
     @img = Gosu::Image.new(@world.window, "images/passengers/" + png, false)
+  end
+
+  #cab ride
+  def cab_ride
+    @distance -= 1000.0
+    @distance = 0 if @distance <= 0.0
+  end
+
+  #update distance
+  def update_dist
+    @distance = rand(5000..10000)
   end
   
 end
