@@ -9,7 +9,7 @@ class Taxi < Car
 
   def initialize window, x, y
     super window, x, y, "images/cars/taxi.png"
-    @fuel, @damage, @money, @lives, @score = 100, 100, 200, 3, 0
+    @fuel, @damage, @money, @lives, @score, @distance = 100, 100, 200, 3, 0, 0
     @ui = Gosu::Font.new(window, 'Monaco', 25)
     @beep = Gosu::Song.new(window, 'sounds/beep.ogg')
     @acc = Gosu::Song.new(window, 'sounds/cars.ogg')
@@ -18,7 +18,7 @@ class Taxi < Car
   end
 
   attr_accessor :pass, :last_trip
-  attr_reader :x, :y
+  attr_reader :x, :y, :distance
 
   #draw
   def draw
@@ -33,6 +33,11 @@ class Taxi < Car
   def go
     super
     @acc.play(looping = true)
+    @distance += 5.0
+    if (@distance % 1000 == 0)
+      @score += 100
+      @fuel -= 2.0
+    end
   end
 
   #brake
@@ -54,6 +59,11 @@ class Taxi < Car
     brake if window.button_down? Gosu::KbDown
     beep if window.button_down? Gosu::KbSpace
     move
+  end
+
+  #add passenger
+  def add_pass
+    @pass = true
   end
 
 end
