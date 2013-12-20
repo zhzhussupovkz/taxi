@@ -13,6 +13,7 @@ class Taxi < Car
     @ui = Gosu::Font.new(window, 'Monaco', 25)
     @beep = Gosu::Song.new(window, 'sounds/beep.ogg')
     @acc = Gosu::Song.new(window, 'sounds/cars.ogg')
+    @door = Gosu::Song.new(window, 'sounds/door.ogg')
     @pass = false
     @last_trip = Time.now.to_i
   end
@@ -65,6 +66,7 @@ class Taxi < Car
   #add passenger
   def add_pass
     @pass = true
+    @door.play(looping = false)
   end
 
 end
