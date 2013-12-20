@@ -11,7 +11,7 @@ class Passenger
     @world, @x, @y = world, x, y
     png = ["boy.png", "girl.png"].sample
     @img = Gosu::Image.new(@world.window, "images/passengers/" + png, false)
-    @distance = rand(1000..5000)
+    @distance = rand(10000..50000)
     @drawing = false
   end
 

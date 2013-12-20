@@ -72,8 +72,12 @@ class World
       curr = @taxi.last_trip
       time = rand(curr + 3..curr + 120)
       if (time == Time.now.to_i)
-        @pass.y = taxi.y - 100
+        @pass.y = 225
         @pass.drawing = true
+      end
+      if window.button_down? Gosu::KbRightAlt
+        @pass.drawing = false
+        @taxi.add_pass
       end
     end
   end

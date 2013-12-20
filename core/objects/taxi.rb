@@ -35,8 +35,9 @@ class Taxi < Car
     @acc.play(looping = true)
     @distance += 5.0
     if (@distance % 1000 == 0)
-      @score += 100
+      @score += 100 if @pass == true
       @fuel -= 2.0
+      @money += 10 if @pass == true
     end
   end
 
