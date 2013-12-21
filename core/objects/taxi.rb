@@ -12,7 +12,7 @@ class Taxi < Car
     @fuel, @damage, @money, @lives, @score, @distance = 100, 100, 200, 3, 0, 0
     @ui = Gosu::Font.new(window, 'Monaco', 25)
     @beep = Gosu::Song.new(window, 'sounds/beep.ogg')
-    @acc = Gosu::Song.new(window, 'sounds/cars.ogg')
+    @acc = Gosu::Song.new(window, 'sounds/acc.ogg')
     @door = Gosu::Song.new(window, 'sounds/door.ogg')
     @pass = false
     @last_trip = Time.now.to_i
@@ -38,13 +38,14 @@ class Taxi < Car
     if (@distance % 1000 == 0)
       @score += 100 if @pass == true
       @fuel -= 2.0
+      @fuel = 0 if @fuel <= 0
       if @pass == true
         @money += 10
         window.world.pass.cab_ride
       end
     end
     if window.world.pass.distance == 0
-      @pass = false
+      del_pass
       window.world.pass.update_dist
     end
   end
@@ -73,6 +74,12 @@ class Taxi < Car
   #add passenger
   def add_pass
     @pass = true
+    @door.play(looping = false)
+  end
+
+  #del passenger
+  def del_pass
+    @pass = false
     @door.play(looping = false)
   end
 

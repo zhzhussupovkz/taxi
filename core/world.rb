@@ -70,7 +70,7 @@ class World
     @taxi.driving
     if not @taxi.pass
       curr = @taxi.last_trip
-      time = rand(curr + 3..curr + 120)
+      time = rand(curr + 5..curr + 60)
       if (time == Time.now.to_i)
         @pass.y = 225
         @pass.drawing = true
