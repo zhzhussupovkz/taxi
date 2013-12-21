@@ -14,6 +14,7 @@ class World
     @board = Board.new(window)
     @taxi = Taxi.new(window, 250, 425)
     @pass = Passenger.new(self, 347.5, 0)
+    @prize = Prize.new(window)
     @trees, @houses, @drivers = [], [], []
   end
 
@@ -59,6 +60,7 @@ class World
     @taxi.draw
     @board.draw
     @pass.draw
+    @prize.draw
   end
 
   #update
@@ -66,8 +68,18 @@ class World
     @drivers.each do |e| e.move_down end
     @houses.each do |e| e.move end if window.button_down? Gosu::KbUp
     @trees.each do |e| e.move end if window.button_down? Gosu::KbUp
-    @pass.move if window.button_down? Gosu::KbUp
+    if window.button_down? Gosu::KbUp
+      @pass.move
+      @prize.move
+    end
     @taxi.driving
+    update_passenger
+    update_prize
+    collect_prizes
+  end
+
+  #update passenger
+  def update_passenger
     if not @taxi.pass
       curr = @taxi.last_trip
       time = rand(curr + 5..curr + 60)
@@ -78,6 +90,31 @@ class World
       if (window.button_down? Gosu::KbRightAlt) || (window.button_down? Gosu::KbLeftAlt)
         @pass.drawing = false
         @taxi.add_pass
+      end
+    end
+  end
+
+  #update prize
+  def update_prize
+    curr = @taxi.last_prize
+    time = rand(curr + 10..curr + 30)
+    if (time == Time.now.to_i)
+      @prize.drawing = true
+    end
+  end
+
+  #collect prizes
+  def collect_prizes
+    if (@prize.x - @taxi.x).abs <= 10.0 && (@prize.y - @taxi.y).abs <= 10.0 && (@prize.drawing == true)
+      @prize.drawing = false
+      @taxi.last_prize = Time.now.to_i
+      case @prize.type
+      when 'fuel'
+        @taxi.refuel
+      when 'money'
+        @taxi.coin
+      when 'damage'
+        @taxi.repair
       end
     end
   end

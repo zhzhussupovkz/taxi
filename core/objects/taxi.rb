@@ -15,10 +15,10 @@ class Taxi < Car
     @acc = Gosu::Song.new(window, 'sounds/acc.ogg')
     @door = Gosu::Song.new(window, 'sounds/door.ogg')
     @pass = false
-    @last_trip = Time.now.to_i
+    @last_trip, @last_prize = Time.now.to_i, Time.now.to_i
   end
 
-  attr_accessor :pass, :last_trip
+  attr_accessor :pass, :last_trip, :last_prize
   attr_reader :x, :y, :distance
 
   #draw
@@ -36,11 +36,11 @@ class Taxi < Car
     @acc.play(looping = true)
     @distance += 5.0
     if (@distance % 1000 == 0)
-      @score += 100 if @pass == true
       @fuel -= 2.0
       @fuel = 0 if @fuel <= 0
       if @pass == true
         @money += 10
+        @score += 100
         window.world.pass.cab_ride
       end
     end
@@ -81,6 +81,23 @@ class Taxi < Car
   def del_pass
     @pass = false
     @door.play(looping = false)
+  end
+
+  #add fuel
+  def refuel
+    @fuel += 10
+    @fuel = 100 if @fuel >= 100
+  end
+
+  #repair auto
+  def repair
+    @damage += 10
+    @damage = 100 if @damage >= 100
+  end
+
+  #add money
+  def coin
+    @money += 5
   end
 
 end
