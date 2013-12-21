@@ -75,7 +75,7 @@ class World
         @pass.y = 225
         @pass.drawing = true
       end
-      if window.button_down? Gosu::KbRightAlt
+      if (window.button_down? Gosu::KbRightAlt) || (window.button_down? Gosu::KbLeftAlt)
         @pass.drawing = false
         @taxi.add_pass
       end
