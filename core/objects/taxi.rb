@@ -8,14 +8,18 @@
 class Taxi < Car
 
   def initialize window, x, y
-    super window, x, y, "images/cars/taxi.png"
-    @fuel, @damage, @money, @lives, @score, @distance = 100, 100, 200, 3, 0, 0
-    @ui = Gosu::Font.new(window, 'Monaco', 25)
-    @beep = Gosu::Song.new(window, 'sounds/beep.ogg')
-    @acc = Gosu::Song.new(window, 'sounds/acc.ogg')
-    @door = Gosu::Song.new(window, 'sounds/door.ogg')
-    @pass = false
-    @last_trip, @last_prize = Time.now.to_i, Time.now.to_i
+    begin
+      super window, x, y, "images/cars/taxi.png"
+      @fuel, @damage, @money, @lives, @score, @distance = 100, 100, 200, 3, 0, 0
+      @ui = Gosu::Font.new(window, 'Monaco', 25)
+      @beep = Gosu::Song.new(window, 'sounds/beep.ogg')
+      @acc = Gosu::Song.new(window, 'sounds/acc.ogg')
+      @door = Gosu::Song.new(window, 'sounds/door.ogg')
+      @pass = false
+      @last_trip, @last_prize = Time.now.to_i, Time.now.to_i
+    rescue Exception => e
+      puts "#{e.class}: #{e.message}"
+    end
   end
 
   attr_accessor :pass, :last_trip, :last_prize

@@ -8,10 +8,14 @@
 class Tree
 
   def initialize window, x, y
-    @window = window
-    @x, @y = x, y
-    png = ['tree.png', 'tree_1.png'].sample
-    @img = Gosu::Image.new(window, "images/houses/" + png, false)
+    begin
+      @window = window
+      @x, @y = x, y
+      png = ['tree.png', 'tree_1.png'].sample
+      @img = Gosu::Image.new(window, "images/houses/" + png, false)
+    rescue Exception => e
+      puts "#{e.class}: #{e.message}"
+    end
   end
 
   #draw

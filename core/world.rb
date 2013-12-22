@@ -8,14 +8,18 @@
 class World
 
   def initialize window
-    @window = window
-    @bg = Gosu::Image.new(window, 'images/env/green.png', true)
-    @road = Road.new(window, 120, 0)
-    @board = Board.new(window)
-    @taxi = Taxi.new(window, 250, 425)
-    @pass = Passenger.new(self, 347.5, 0)
-    @prize = Prize.new(window)
-    @trees, @houses, @drivers = [], [], []
+    begin
+      @window = window
+      @bg = Gosu::Image.new(window, 'images/env/green.png', true)
+      @road = Road.new(window, 120, 0)
+      @board = Board.new(window)
+      @taxi = Taxi.new(window, 250, 425)
+      @pass = Passenger.new(self, 347.5, 0)
+      @prize = Prize.new(window)
+      @trees, @houses, @drivers = [], [], []
+    rescue Exception => e
+      puts "#{e.class}: #{e.message}"
+    end
   end
 
   attr_reader :window, :trees, :taxi, :pass
@@ -52,30 +56,38 @@ class World
 
   #draw
   def draw
-    @bg.draw(0, 0, 0)
-    @road.draw
-    @trees.each do |e| e.draw end
-    @houses.each do |e| e.draw end
-    @drivers.each do |e| e.draw end
-    @taxi.draw
-    @board.draw
-    @pass.draw
-    @prize.draw
+    begin
+      @bg.draw(0, 0, 0)
+      @road.draw
+      @trees.each do |e| e.draw end
+      @houses.each do |e| e.draw end
+      @drivers.each do |e| e.draw end
+      @taxi.draw
+      @board.draw
+      @pass.draw
+      @prize.draw
+    rescue Exception => e
+      puts "#{e.class}: #{e.message}"
+    end
   end
 
   #update
   def update
-    @drivers.each do |e| e.move_down end
-    @houses.each do |e| e.move end if window.button_down? Gosu::KbUp
-    @trees.each do |e| e.move end if window.button_down? Gosu::KbUp
-    if window.button_down? Gosu::KbUp
-      @pass.move
-      @prize.move
+    begin
+      @drivers.each do |e| e.move_down end
+      @houses.each do |e| e.move end if window.button_down? Gosu::KbUp
+      @trees.each do |e| e.move end if window.button_down? Gosu::KbUp
+      if window.button_down? Gosu::KbUp
+        @pass.move
+        @prize.move
+      end
+      @taxi.driving
+      update_passenger
+      update_prize
+      collect_prizes
+    rescue Exception => e
+      puts "#{e.class}: #{e.message}"
     end
-    @taxi.driving
-    update_passenger
-    update_prize
-    collect_prizes
   end
 
   #update passenger

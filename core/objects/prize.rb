@@ -8,10 +8,14 @@
 class Prize
 
   def initialize window
-    @window = window
-    @x, @y, @drawing = rand(225..280), rand(100..400), false
-    @type = ['fuel', 'money', 'damage'].sample
-    @img = Gosu::Image.new(window, "images/env/present.png", false)
+    begin
+      @window = window
+      @x, @y, @drawing = rand(225..280), rand(100..400), false
+      @type = ['fuel', 'money', 'damage'].sample
+      @img = Gosu::Image.new(window, "images/env/present.png", false)
+    rescue Exception => e
+      puts "#{e.class}: #{e.message}"
+    end
   end
 
   attr_accessor :drawing

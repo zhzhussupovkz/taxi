@@ -8,9 +8,13 @@
 class Road
 
   def initialize window, x, y
-    @window = window
-    @x, @y = x, y
-    @img = Gosu::Image.new(window, "images/env/road.png", false)
+    begin
+      @window = window
+      @x, @y = x, y
+      @img = Gosu::Image.new(window, "images/env/road.png", false)
+    rescue Exception => e
+      puts "#{e.class}: #{e.message}"
+    end
   end
 
   #draw

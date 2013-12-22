@@ -12,9 +12,13 @@ class GameWindow < Gosu::Window
   def initialize
     super 640, 480, false
     self.caption = 'Taxi Game'
-    @world = World.new(self)
-    @st = Time.now.to_i
-    @world.start
+    begin
+      @world = World.new(self)
+      @st = Time.now.to_i
+      @world.start
+    rescue Exception => e
+      puts "#{e.class}: #{e.message}"
+    end
   end
 
   attr_reader :st, :world
@@ -29,6 +33,7 @@ class GameWindow < Gosu::Window
     @world.update
   end
 
+  #button down event
   def button_down(key)
     case key
     when Gosu::KbEscape

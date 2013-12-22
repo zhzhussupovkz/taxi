@@ -9,13 +9,17 @@
 class Board
 
   def initialize window
-    @window = window
-    @img = Gosu::Image.new(window, 'images/scboard/scboard.png', true)
-    @fuel = Gosu::Image.new(window, 'images/scboard/fuel.png', true)
-    @money = Gosu::Image.new(window, 'images/scboard/dollar.png', true)
-    @damage = Gosu::Image.new(window, 'images/scboard/wrench.png', true)
-    @ui = Gosu::Font.new(window, 'Monaco', 13)
-    @controls = Gosu::Font.new(window, 'Monaco', 20)
+    begin
+      @window = window
+      @img = Gosu::Image.new(window, 'images/scboard/scboard.png', true)
+      @fuel = Gosu::Image.new(window, 'images/scboard/fuel.png', true)
+      @money = Gosu::Image.new(window, 'images/scboard/dollar.png', true)
+      @damage = Gosu::Image.new(window, 'images/scboard/wrench.png', true)
+      @ui = Gosu::Font.new(window, 'Monaco', 13)
+      @controls = Gosu::Font.new(window, 'Monaco', 20)
+    rescue Exception => e
+      puts "#{e.class}: #{e.message}"
+    end
   end
 
   attr_reader :window

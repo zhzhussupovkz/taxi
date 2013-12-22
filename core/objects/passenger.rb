@@ -8,11 +8,15 @@
 class Passenger
 
   def initialize world, x, y
-    @world, @x, @y = world, x, y
-    png = ["boy.png", "girl.png"].sample
-    @img = Gosu::Image.new(@world.window, "images/passengers/" + png, false)
-    @distance = rand(5000..10000)
-    @drawing = false
+    begin
+      @world, @x, @y = world, x, y
+      png = ["boy.png", "girl.png"].sample
+      @img = Gosu::Image.new(@world.window, "images/passengers/" + png, false)
+      @distance = rand(5000..10000)
+      @drawing = false
+    rescue Exception => e
+      puts "#{e.class}: #{e.message}"
+    end
   end
 
   attr_accessor :drawing, :x, :y

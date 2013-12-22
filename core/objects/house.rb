@@ -8,10 +8,14 @@
 class House
 
   def initialize window, x, y
-    @window = window
-    @x, @y = x, y
-    png = ["1.png", "2.png", "3.png", "4.png"].sample
-    @img = Gosu::Image.new(window, "images/houses/house_" + png, false)
+    begin
+      @window = window
+      @x, @y = x, y
+      png = ["1.png", "2.png", "3.png", "4.png"].sample
+      @img = Gosu::Image.new(window, "images/houses/house_" + png, false)
+    rescue Exception => e
+      puts "#{e.class}: #{e.message}"
+    end
   end
 
   #draw
