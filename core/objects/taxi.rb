@@ -108,5 +108,14 @@ class Taxi < Car
     @money += 5
   end
 
+  #add injury
+  def add_injury
+    @damage -= 2.0
+    if @damage <= 0
+      @damage = 0
+      @lives -= 1
+    end
+  end
+
 end
 

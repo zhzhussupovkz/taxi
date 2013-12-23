@@ -10,9 +10,10 @@ class Car
   def initialize window, x, y, img
     @window, @x, @y = window, x, y
     @img = Gosu::Image.new(window, img, false)
+    @injury = false
   end
   
-  attr_accessor :x, :y
+  attr_accessor :x, :y, :injury
   attr_reader :window
 
   #move left
