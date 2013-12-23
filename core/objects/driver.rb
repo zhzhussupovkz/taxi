@@ -18,6 +18,7 @@ class Driver < Car
   #move down
   def move_down
     @y += 2.5
+    @y += 1.75 if window.button_down? Gosu::KbUp
     if @y >= 480
       change
       @y = 0 
