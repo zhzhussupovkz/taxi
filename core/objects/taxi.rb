@@ -36,21 +36,25 @@ class Taxi < Car
 
   #accelerate
   def go
-    super
-    @acc.play(looping = true)
-    @distance += 5.0
-    if (@distance % 1000 == 0)
-      @fuel -= 2.0
-      @fuel = 0 if @fuel <= 0
-      if @pass == true
-        @money += 10
-        @score += 100
-        window.world.pass.cab_ride
+    begin
+      super
+      @acc.play(looping = true)
+      @distance += 5.0
+      if (@distance % 1000 == 0)
+        @fuel -= 2.0
+        @fuel = 0 if @fuel <= 0
+        if @pass == true
+          @money += 10
+          @score += 100
+          window.world.pass.cab_ride
+        end
       end
-    end
-    if window.world.pass.distance == 0
-      del_pass
-      window.world.pass.update_dist
+      if window.world.pass.distance == 0
+        del_pass
+        window.world.pass.update_dist
+      end
+    rescue Exception => e
+      puts "#{e.class}: #{e.message}"
     end
   end
 
