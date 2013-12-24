@@ -85,6 +85,12 @@ class World
       update_passenger
       update_prize
       collect_prizes
+      @drivers.each do |e|
+      if (e.x - @taxi.x).abs <= 15.0 && (e.y - @taxi.y).abs <= 15.0
+        @drivers.each do |d| d.add_injury end
+        @taxi.add_injury
+      end
+    end
     rescue Exception => e
       puts "#{e.class}: #{e.message}"
     end
@@ -95,7 +101,7 @@ class World
     if not @taxi.pass
       curr = @taxi.last_trip
       time = rand(curr + 5..curr + 60)
-      if (time == Time.now.to_i)
+      if time == Time.now.to_i
         @pass.y = 225
         @pass.drawing = true
       end
@@ -110,7 +116,7 @@ class World
   def update_prize
     curr = @taxi.last_prize
     time = rand(curr + 10..curr + 30)
-    if (time == Time.now.to_i)
+    if time == Time.now.to_i
       @prize.drawing = true
     end
   end

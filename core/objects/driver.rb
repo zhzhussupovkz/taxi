@@ -17,7 +17,7 @@ class Driver < Car
 
   #move down
   def move_down
-    @y += 2.5
+    @y += 2.5 if not injury
     @y += 1.75 if window.button_down? Gosu::KbUp
     if @y >= 480
       change
@@ -27,10 +27,16 @@ class Driver < Car
 
   #change
   def change
+    @injury = false
     model = ["car_1", "car_2"].sample
     @img = Gosu::Image.new(window, "images/cars/" + model + ".png", false)
     coord = rand(135..185)
     @x = coord
+  end
+
+  #add injury
+  def add_injury
+    @injury = true
   end
 
 end
