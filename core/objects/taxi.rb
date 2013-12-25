@@ -114,7 +114,16 @@ class Taxi < Car
     if @damage <= 0
       @damage = 0
       @lives -= 1
+      reboot
     end
+  end
+
+  #reboot player 
+  def reboot
+    @x, @y = 250, 425
+    sleep(2)
+    @damage = 100
+    @last_trip, @last_prize = Time.now.to_i, Time.now.to_i
   end
 
 end
