@@ -88,6 +88,7 @@ class World
       if (e.x - @taxi.x).abs <= 15.0 && (e.y - @taxi.y).abs <= 15.0
         @drivers.each do |d| d.add_injury end
         @taxi.add_injury
+        @drivers.each do |d| d.repair end
       end
     end
     rescue Exception => e

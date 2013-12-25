@@ -40,5 +40,10 @@ class Driver < Car
     @injury = true
   end
 
+  #repair
+  def repair
+    @injury = false
+  end
+
 end
 
