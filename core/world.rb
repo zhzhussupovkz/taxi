@@ -123,7 +123,7 @@ class World
 
   #collect prizes
   def collect_prizes
-    if (@prize.x - @taxi.x).abs <= 10.0 && (@prize.y - @taxi.y).abs <= 10.0 && (@prize.drawing == true)
+    if (@prize.x - @taxi.x).abs <= 15.0 && (@prize.y - @taxi.y).abs <= 15.0 && (@prize.drawing == true)
       @prize.drawing = false
       @taxi.last_prize = Time.now.to_i
       case @prize.type

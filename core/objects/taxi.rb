@@ -116,6 +116,8 @@ class Taxi < Car
   #add injury
   def add_injury
     @damage -= 2.0
+    @x += 20.0
+    @y += 15.0
     if @damage <= 0
       @damage = 0
       reboot
