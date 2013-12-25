@@ -49,8 +49,7 @@ class World
   def gen_drivers
     (10..600).step(150) do |i|
       coord = rand(135..185)
-      model = ["car_1", "car_2"].sample
-      @drivers << Driver.new(window, coord, i, "images/cars/" + model + ".png")
+      @drivers << Driver.new(window, coord, i)
     end
   end
 

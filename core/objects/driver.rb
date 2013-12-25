@@ -7,9 +7,10 @@
 #Driver
 class Driver < Car
 
-  def initialize window, x, y, img
+  def initialize window, x, y
     begin
-      super window, x, y, img
+      model = ["car_1", "car_2"].sample
+      super window, x, y, "images/cars/" + model + ".png"
     rescue Exception => e
       puts "#{e.class}: #{e.message}"
     end

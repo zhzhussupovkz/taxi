@@ -22,11 +22,5 @@ class Road
     @img.draw(@x, @y, 1)
   end
 
-  #move
-  def move
-    @y += 3.0
-    @y = 0 if @y >= 480
-  end
-
 end
 
