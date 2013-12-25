@@ -9,7 +9,7 @@ class Driver < Car
 
   def initialize window, x, y
     begin
-      model = ["car_1", "car_2"].sample
+      model = ["car_1", "car_2", "car_3", "car_4", "car_5"].sample
       super window, x, y, "images/cars/" + model + ".png"
     rescue Exception => e
       puts "#{e.class}: #{e.message}"
@@ -29,7 +29,7 @@ class Driver < Car
   #change
   def change
     @injury = false
-    model = ["car_1", "car_2"].sample
+    model = ["car_1", "car_2", "car_3", "car_4", "car_5"].sample
     @img = Gosu::Image.new(window, "images/cars/" + model + ".png", false)
     coord = rand(135..185)
     @x = coord
