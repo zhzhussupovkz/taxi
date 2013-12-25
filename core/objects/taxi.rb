@@ -32,6 +32,11 @@ class Taxi < Car
     @ui.draw("#{@money}", 525, 52, 2)
     @ui.draw("#{@damage}", 525, 77, 2)
     @ui.draw("#{@fuel}", 525, 102, 2)
+    xc = 0
+    @lives.times do
+      @img.draw(485 + xc, 140, 2)
+      xc += 34
+    end
   end
 
   #accelerate
@@ -113,7 +118,6 @@ class Taxi < Car
     @damage -= 2.0
     if @damage <= 0
       @damage = 0
-      @lives -= 1
       reboot
     end
   end
@@ -122,6 +126,7 @@ class Taxi < Car
   def reboot
     @x, @y = 250, 425
     sleep(2)
+    @lives -= 1
     @damage = 100
     @last_trip, @last_prize = Time.now.to_i, Time.now.to_i
   end
