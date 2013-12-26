@@ -15,6 +15,7 @@ class Taxi < Car
       @beep = Gosu::Song.new(window, 'sounds/beep.ogg')
       @acc = Gosu::Song.new(window, 'sounds/acc.ogg')
       @door = Gosu::Song.new(window, 'sounds/door.ogg')
+      @crash = Gosu::Song.new(window, 'sounds/crash.ogg')
       @pass = false
       @last_trip, @last_prize = Time.now.to_i, Time.now.to_i
     rescue Exception => e
@@ -120,6 +121,7 @@ class Taxi < Car
     @y += 15.0
     if @damage <= 0
       @damage = 0
+      @crash.play(looping = false)
       reboot
     end
   end
