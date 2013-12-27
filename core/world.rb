@@ -73,6 +73,7 @@ class World
   #update
   def update
     begin
+      @road.update
       @drivers.each do |e| e.move_down end
       @houses.each do |e| e.move end if (window.button_down? Gosu::KbUp) && (not taxi.dead)
       @trees.each do |e| e.move end if (window.button_down? Gosu::KbUp) && (not taxi.dead)
