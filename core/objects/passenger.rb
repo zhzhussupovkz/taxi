@@ -39,8 +39,10 @@ class Passenger
 
   #change pass
   def change
-    png = ["boy.png", "girl.png"].sample
-    @img = Gosu::Image.new(@world.window, "images/passengers/" + png, false)
+    if @world.taxi.pass == false
+      png = ["boy.png", "girl.png"].sample
+      @img = Gosu::Image.new(@world.window, "images/passengers/" + png, false)
+    end
   end
 
   #cab ride

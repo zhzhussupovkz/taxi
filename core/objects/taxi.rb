@@ -93,8 +93,12 @@ class Taxi < Car
 
   #del passenger
   def del_pass
+    @acc.stop
+    sleep(2)
     @pass = false
     @door.play(looping = false)
+    window.world.pass.y = 225
+    window.world.pass.drawing = true
   end
 
   #add fuel
