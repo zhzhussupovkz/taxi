@@ -16,15 +16,16 @@ class Taxi < Car
       @acc = Gosu::Song.new(window, 'sounds/acc.ogg')
       @door = Gosu::Song.new(window, 'sounds/door.ogg')
       @crash = Gosu::Song.new(window, 'sounds/crash.ogg')
-      @pass = false
+      @game_over = Gosu::Font.new(window, 'Monaco', 30)
+      @pass = @dead = false
       @last_trip, @last_prize = Time.now.to_i, Time.now.to_i
     rescue Exception => e
       puts "#{e.class}: #{e.message}"
     end
   end
 
-  attr_accessor :pass, :last_trip, :last_prize
-  attr_reader :x, :y, :distance
+  attr_accessor :pass, :last_trip, :last_prize, :lives
+  attr_reader :x, :y, :distance, :dead
 
   #draw
   def draw
@@ -33,6 +34,7 @@ class Taxi < Car
     @ui.draw("#{@money}", 525, 52, 2)
     @ui.draw("#{@damage}", 525, 77, 2)
     @ui.draw("#{@fuel}", 525, 102, 2)
+    @game_over.draw("GAME OVER", 490, 400, 3) if dead
     xc = 0
     @lives.times do
       @img.draw(485 + xc, 140, 2)
@@ -77,12 +79,16 @@ class Taxi < Car
 
   #driving
   def driving
-    move_left if window.button_down? Gosu::KbLeft
-    move_right if window.button_down? Gosu::KbRight
-    go if window.button_down? Gosu::KbUp
-    brake if window.button_down? Gosu::KbDown
-    beep if window.button_down? Gosu::KbSpace
-    move
+    if lives > 0
+      move_left if window.button_down? Gosu::KbLeft
+      move_right if window.button_down? Gosu::KbRight
+      go if window.button_down? Gosu::KbUp
+      brake if window.button_down? Gosu::KbDown
+      beep if window.button_down? Gosu::KbSpace
+      move
+    else
+      game_over
+    end
   end
 
   #add passenger
@@ -137,6 +143,11 @@ class Taxi < Car
     @lives -= 1
     @damage = 100
     @last_trip, @last_prize = Time.now.to_i, Time.now.to_i
+  end
+
+  #game over
+  def game_over
+    @dead = true
   end
 
 end

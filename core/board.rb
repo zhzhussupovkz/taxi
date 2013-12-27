@@ -49,6 +49,7 @@ class Board
     @controls.draw("left,right - ← →", 485, 250, 2)
     @controls.draw("beep - space", 485, 275, 2)
     @controls.draw("add pass - alt", 485, 300, 2)
+    @controls.draw("quit - esc", 485, 325, 2)
   end
 
 end

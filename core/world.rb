@@ -74,9 +74,9 @@ class World
   def update
     begin
       @drivers.each do |e| e.move_down end
-      @houses.each do |e| e.move end if window.button_down? Gosu::KbUp
-      @trees.each do |e| e.move end if window.button_down? Gosu::KbUp
-      if window.button_down? Gosu::KbUp
+      @houses.each do |e| e.move end if (window.button_down? Gosu::KbUp) && (not taxi.dead)
+      @trees.each do |e| e.move end if (window.button_down? Gosu::KbUp) && (not taxi.dead)
+      if (window.button_down? Gosu::KbUp) && (not taxi.dead)
         @pass.move
         @prize.move
       end
