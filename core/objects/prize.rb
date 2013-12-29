@@ -10,7 +10,7 @@ class Prize
   def initialize window
     begin
       @window = window
-      @x, @y, @drawing = rand(225..280), rand(100..400), false
+      @x, @y, @drawing = rand(225..280), rand(10..150), false
       @type = ['fuel', 'money', 'damage'].sample
       @img = Gosu::Image.new(window, "images/env/present.png", false)
     rescue Exception => e
@@ -28,7 +28,7 @@ class Prize
 
   #move
   def move
-    @y += 3.0
+    @y += 3.0 if @drawing
     if @y >= 480
       @y = 0
       @window.world.taxi.last_prize = Time.now.to_i
@@ -38,7 +38,7 @@ class Prize
 
   #change
   def change
-    @x, @y = rand(225..280), rand(100..400)
+    @x, @y = rand(225..280), rand(10..150)
     @type = ['fuel', 'money', 'damage'].sample
     @drawing = false
   end
