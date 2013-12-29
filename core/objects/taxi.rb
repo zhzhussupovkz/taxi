@@ -89,6 +89,7 @@ class Taxi < Car
     else
       game_over
     end
+    collect_prizes
   end
 
   #add passenger
@@ -117,6 +118,22 @@ class Taxi < Car
   def repair
     @damage += 10
     @damage = 100 if @damage >= 100
+  end
+
+  #collect prizes
+  def collect_prizes
+    if (window.world.prize.x - @x).abs <= 15.0 && (window.world.prize.y - @y).abs <= 15.0 && (window.world.prize.drawing == true)
+      window.world.prize.drawing = false
+      @last_prize = Time.now.to_i
+      case window.world.prize.type
+      when 'fuel'
+        refuel
+      when 'money'
+        coin
+      when 'damage'
+        repair
+      end
+    end
   end
 
   #add money

@@ -27,6 +27,21 @@ class Passenger
     @img.draw(@x, @y, 2) if @drawing
   end
 
+  #update
+  def update
+    if not world.taxi.pass
+      curr = world.taxi.last_trip
+      time = rand(curr + 5..curr + 60)
+      if time == Time.now.to_i
+        @drawing = true
+      end
+      if (world.window.button_down? Gosu::KbRightAlt) || (world.window.button_down? Gosu::KbLeftAlt)
+        @drawing = false
+        world.taxi.add_pass
+      end
+    end
+  end
+
   #move
   def move
     @y += 3.0 if @drawing

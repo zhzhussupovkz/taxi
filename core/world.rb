@@ -22,7 +22,7 @@ class World
     end
   end
 
-  attr_reader :window, :trees, :taxi, :pass
+  attr_reader :window, :trees, :taxi, :pass, :prize
 
   #start
   def start
@@ -82,9 +82,8 @@ class World
         @prize.move
       end
       @taxi.driving
-      update_passenger
-      update_prize
-      collect_prizes
+      @pass.update
+      @prize.update
       @drivers.each do |e|
       if (e.x - @taxi.x).abs <= 15.0 && (e.y - @taxi.y).abs <= 15.0
         @drivers.each do |d| d.add_injury end
@@ -97,45 +96,5 @@ class World
     end
   end
 
-  #update passenger
-  def update_passenger
-    if not @taxi.pass
-      curr = @taxi.last_trip
-      time = rand(curr + 5..curr + 60)
-      if time == Time.now.to_i
-        @pass.drawing = true
-      end
-      if (window.button_down? Gosu::KbRightAlt) || (window.button_down? Gosu::KbLeftAlt)
-        @pass.drawing = false
-        @taxi.add_pass
-      end
-    end
-  end
-
-  #update prize
-  def update_prize
-    curr = @taxi.last_prize
-    time = rand(curr + 10..curr + 30)
-    if time == Time.now.to_i
-      @prize.drawing = true
-    end
-  end
-
-  #collect prizes
-  def collect_prizes
-    if (@prize.x - @taxi.x).abs <= 15.0 && (@prize.y - @taxi.y).abs <= 15.0 && (@prize.drawing == true)
-      @prize.drawing = false
-      @taxi.last_prize = Time.now.to_i
-      case @prize.type
-      when 'fuel'
-        @taxi.refuel
-      when 'money'
-        @taxi.coin
-      when 'damage'
-        @taxi.repair
-      end
-    end
-  end
-  
 end
 

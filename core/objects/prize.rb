@@ -19,11 +19,20 @@ class Prize
   end
 
   attr_accessor :drawing
-  attr_reader :type, :x, :y
+  attr_reader :type, :x, :y, :window
 
   #draw
   def draw
     @img.draw(@x, @y, 2) if @drawing
+  end
+
+  #update
+  def update
+    curr = window.world.taxi.last_prize
+    time = rand(curr + 10..curr + 30)
+    if time == Time.now.to_i
+      @drawing = true
+    end
   end
 
   #move
