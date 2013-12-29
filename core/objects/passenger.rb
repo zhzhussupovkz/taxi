@@ -20,7 +20,7 @@ class Passenger
   end
 
   attr_accessor :drawing, :x, :y
-  attr_reader :distance
+  attr_reader :distance, :world
 
   #draw
   def draw
@@ -29,7 +29,7 @@ class Passenger
 
   #move
   def move
-    @y += 3.0
+    @y += 3.0 if @drawing
     if @y >= 480
       @drawing = false
       change
@@ -39,6 +39,7 @@ class Passenger
 
   #change pass
   def change
+    @y = 25
     if @world.taxi.pass == false
       png = ["boy.png", "girl.png"].sample
       @img = Gosu::Image.new(@world.window, "images/passengers/" + png, false)

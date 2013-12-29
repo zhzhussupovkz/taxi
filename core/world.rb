@@ -14,7 +14,7 @@ class World
       @road = Road.new(window, 120, 0)
       @board = Board.new(window)
       @taxi = Taxi.new(window, 250, 425)
-      @pass = Passenger.new(self, 347.5, 0)
+      @pass = Passenger.new(self, 347.5, 25)
       @prize = Prize.new(window)
       @trees, @houses, @drivers = [], [], []
     rescue Exception => e
@@ -103,7 +103,6 @@ class World
       curr = @taxi.last_trip
       time = rand(curr + 5..curr + 60)
       if time == Time.now.to_i
-        @pass.y = 225
         @pass.drawing = true
       end
       if (window.button_down? Gosu::KbRightAlt) || (window.button_down? Gosu::KbLeftAlt)
