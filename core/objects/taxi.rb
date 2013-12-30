@@ -134,6 +134,7 @@ class Taxi < Car
       when 'damage'
         repair
       end
+      window.world.prize.change
     end
   end
 
