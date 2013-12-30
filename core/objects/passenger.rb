@@ -14,17 +14,24 @@ class Passenger
       @img = Gosu::Image.new(@world.window, "images/passengers/" + png, false)
       @distance = rand(5000..10000)
       @drawing = false
+      @ride = false
+      @ui = Gosu::Font.new(world.window, 'Monaco', 25)
     rescue Exception => e
       puts "#{e.class}: #{e.message}"
     end
   end
 
-  attr_accessor :drawing, :x, :y
+  attr_accessor :drawing, :x, :y, :ride
   attr_reader :distance, :world
 
   #draw
   def draw
     @img.draw(@x, @y, 2) if @drawing
+    if world.taxi.pass
+      @ui.draw("Distance: #{@distance}", 475, 50, 2)
+    else
+      @ui.draw("Distance: 0", 475, 50, 2) 
+    end
   end
 
   #update
@@ -35,7 +42,7 @@ class Passenger
       if time == Time.now.to_i
         @drawing = true
       end
-      if (world.window.button_down? Gosu::KbRightAlt) || (world.window.button_down? Gosu::KbLeftAlt)
+      if ((world.window.button_down? Gosu::KbRightAlt) || (world.window.button_down? Gosu::KbLeftAlt)) && (ride == false)
         @drawing = false
         world.taxi.add_pass
       end
@@ -55,6 +62,7 @@ class Passenger
   #change pass
   def change
     @y = 25
+    @ride = false
     if @world.taxi.pass == false
       png = ["boy.png", "girl.png"].sample
       @img = Gosu::Image.new(@world.window, "images/passengers/" + png, false)
@@ -63,7 +71,7 @@ class Passenger
 
   #cab ride
   def cab_ride
-    @distance -= 1000.0
+    @distance -= 1000
     @distance = 0 if @distance <= 0.0
   end
 

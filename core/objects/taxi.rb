@@ -31,13 +31,13 @@ class Taxi < Car
   def draw
     super
     @ui.draw("Score: #{@score}", 485, 20, 2)
-    @ui.draw("#{@money}", 525, 52, 2)
-    @ui.draw("#{@damage}", 525, 77, 2)
-    @ui.draw("#{@fuel}", 525, 102, 2)
-    @game_over.draw("GAME OVER", 490, 400, 3) if dead
+    @ui.draw("#{@money}", 525, 82, 2)
+    @ui.draw("#{@damage}", 525, 107, 2)
+    @ui.draw("#{@fuel}", 525, 132, 2)
+    @game_over.draw("GAME OVER", 475, 400, 3) if dead
     xc = 0
     @lives.times do
-      @img.draw(485 + xc, 140, 2)
+      @img.draw(485 + xc, 170, 2)
       xc += 34
     end
   end
@@ -104,6 +104,7 @@ class Taxi < Car
     sleep(2)
     @pass = false
     @door.play(looping = false)
+    window.world.pass.ride = true
     window.world.pass.y = 225
     window.world.pass.drawing = true
   end

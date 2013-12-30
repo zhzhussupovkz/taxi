@@ -28,9 +28,9 @@ class Board
   def draw
     begin
       @img.draw(440, 0, 1)
-      @money.draw(495, 50, 2)
-      @damage.draw(495, 75, 2)
-      @fuel.draw(495, 100, 2)
+      @money.draw(495, 80, 2)
+      @damage.draw(495, 105, 2)
+      @fuel.draw(495, 130, 2)
       draw_controls
       time = (Time.at(Time.now.to_i - window.st - 3600*6)).strftime("%H:%M:%S")
       @ui.draw("Time: " + time.to_s, 495, 435, 2)
@@ -43,13 +43,13 @@ class Board
 
   #draw controls
   def draw_controls
-    @controls.draw("controls:", 500, 175, 2)
-    @controls.draw("accelerate - ↑", 485, 200, 2)
-    @controls.draw("brake - ↓", 485, 225, 2)
-    @controls.draw("left,right - ← →", 485, 250, 2)
-    @controls.draw("beep - space", 485, 275, 2)
-    @controls.draw("add pass - alt", 485, 300, 2)
-    @controls.draw("quit - esc", 485, 325, 2)
+    @controls.draw("controls:", 500, 205, 2)
+    @controls.draw("accelerate - ↑", 485, 230, 2)
+    @controls.draw("brake - ↓", 485, 255, 2)
+    @controls.draw("left,right - ← →", 485, 280, 2)
+    @controls.draw("beep - space", 485, 305, 2)
+    @controls.draw("add pass - alt", 485, 330, 2)
+    @controls.draw("quit - esc", 485, 355, 2)
   end
 
 end
