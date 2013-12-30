@@ -113,12 +113,20 @@ class Taxi < Car
   def refuel
     @fuel += 10
     @fuel = 100 if @fuel >= 100
+    @score += 3
   end
 
   #repair auto
   def repair
     @damage += 10
     @damage = 100 if @damage >= 100
+    @score += 5
+  end
+
+  #add money
+  def coin
+    @money += 5
+    @score += 10
   end
 
   #collect prizes
@@ -136,11 +144,6 @@ class Taxi < Car
       end
       window.world.prize.change
     end
-  end
-
-  #add money
-  def coin
-    @money += 5
   end
 
   #add injury
