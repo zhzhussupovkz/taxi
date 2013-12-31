@@ -18,7 +18,9 @@ class Taxi < Car
       @crash = Gosu::Song.new(window, 'sounds/crash.ogg')
       @game_over = Gosu::Font.new(window, 'Monaco', 30)
       @pass = @dead = false
-      @last_trip, @last_prize = Time.now.to_i, Time.now.to_i
+      @gear = 1
+      @g = true
+      @last_trip = @last_prize = @last_gear = Time.now.to_i
     rescue Exception => e
       puts "#{e.class}: #{e.message}"
     end
@@ -89,7 +91,24 @@ class Taxi < Car
     else
       game_over
     end
+    transmission
     collect_prizes
+  end
+
+  #transmission
+  def transmission
+    if window.button_down? Gosu::KbLeftShift
+      @gear += 1 if @g
+      @gear = 4 if @gear >= 4
+      @g = false
+    elsif window.button_down? Gosu::KbLeftControl
+      @gear -= 1 if @g
+      @gear = 1 if @gear <= 1
+    end
+    if ((Time.now.to_i - @last_gear) == 10)
+      @g = true
+      @last_gear = Time.now.to_i
+    end
   end
 
   #add passenger
