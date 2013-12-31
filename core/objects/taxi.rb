@@ -36,10 +36,11 @@ class Taxi < Car
     @ui.draw("#{@money}", 525, 82, 2)
     @ui.draw("#{@damage}", 525, 107, 2)
     @ui.draw("#{@fuel}", 525, 132, 2)
-    @game_over.draw("GAME OVER", 475, 400, 3) if dead
+    @ui.draw("#{@gear}", 525, 157, 2)
+    @game_over.draw("GAME OVER", 475, 405, 3) if dead
     xc = 0
     @lives.times do
-      @img.draw(485 + xc, 170, 2)
+      @img.draw(485 + xc, 190, 2)
       xc += 34
     end
   end
@@ -104,6 +105,7 @@ class Taxi < Car
     elsif window.button_down? Gosu::KbLeftControl
       @gear -= 1 if @g
       @gear = 1 if @gear <= 1
+      @g = false
     end
     if ((Time.now.to_i - @last_gear) == 10)
       @g = true
