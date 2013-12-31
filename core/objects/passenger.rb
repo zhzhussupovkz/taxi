@@ -51,7 +51,12 @@ class Passenger
 
   #move
   def move
-    @y += 3.0 if @drawing
+    if @drawing
+      @y += 4.0 if world.taxi.gear == 1
+      @y += 5.0 if world.taxi.gear == 2
+      @y += 7.0 if world.taxi.gear == 3
+      @y += 10.0 if world.taxi.gear == 4
+    end
     if @y >= 480
       @drawing = false
       change

@@ -27,7 +27,7 @@ class Taxi < Car
   end
 
   attr_accessor :pass, :last_trip, :last_prize, :lives
-  attr_reader :x, :y, :distance, :dead
+  attr_reader :x, :y, :distance, :dead, :gear
 
   #draw
   def draw
@@ -49,9 +49,9 @@ class Taxi < Car
     begin
       super
       @acc.play(looping = true)
-      @distance += 5.0
+      @distance += (5.0 * gear)
       if (@distance % 1000 == 0)
-        @fuel -= 2.0
+        @fuel -= (2.0 * gear)
         @fuel = 0 if @fuel <= 0
         if @pass == true
           @money += 10
@@ -167,7 +167,7 @@ class Taxi < Car
 
   #add injury
   def add_injury
-    @damage -= 2.0
+    @damage -= (2.0 * gear)
     @x += 20.0
     @y += 15.0
     if @damage <= 0

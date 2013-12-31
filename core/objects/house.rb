@@ -18,6 +18,8 @@ class House
     end
   end
 
+  attr_reader :window
+
   #draw
   def draw
     @img.draw(@x, @y, 2)
@@ -25,7 +27,10 @@ class House
 
   #move
   def move
-    @y += 3.0
+    @y += 4.0 if window.world.taxi.gear == 1
+    @y += 5.0 if window.world.taxi.gear == 2
+    @y += 7.0 if window.world.taxi.gear == 3
+    @y += 10.0 if window.world.taxi.gear == 4
     @y = 0 if @y >= 480
   end
 

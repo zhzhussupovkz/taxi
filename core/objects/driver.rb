@@ -19,7 +19,12 @@ class Driver < Car
   #move down
   def move_down
     @y += 2.5 if not injury
-    @y += 1.75 if (window.button_down? Gosu::KbUp) && (not window.world.taxi.dead)
+    if (window.button_down? Gosu::KbUp) && (not window.world.taxi.dead)
+      @y += 2.5 if window.world.taxi.gear == 1
+      @y += 3.5 if window.world.taxi.gear == 2
+      @y += 5.5 if window.world.taxi.gear == 3
+      @y += 8.5 if window.world.taxi.gear == 4
+    end
     if @y >= 480
       change
       @y = 0 
