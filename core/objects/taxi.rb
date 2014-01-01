@@ -50,10 +50,13 @@ class Taxi < Car
     begin
       super
       @acc.play(looping = true)
-      @distance += (5.0 * gear)
-      if (@distance % 1000 == 0)
+      @distance += 10
+      if @distance % 1000 == 0
         @fuel -= (2.0 * gear)
-        @fuel = 0 if @fuel <= 0
+        if @fuel <= 0
+          @fuel = 0
+          game_over
+        end
         if @pass == true
           @money += 10
           @score += 100

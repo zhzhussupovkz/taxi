@@ -76,7 +76,7 @@ class Passenger
 
   #cab ride
   def cab_ride
-    @distance -= (500 * world.taxi.gear)
+    @distance -= 1000
     @distance = 0 if @distance <= 0.0
   end
 
