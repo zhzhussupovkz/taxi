@@ -27,7 +27,7 @@ class Taxi < Car
   end
 
   attr_accessor :pass, :last_trip, :last_prize, :lives
-  attr_reader :x, :y, :distance, :dead, :gear
+  attr_reader :x, :y, :distance, :dead, :gear, :fuel
 
   #draw
   def draw
@@ -85,7 +85,7 @@ class Taxi < Car
 
   #driving
   def driving
-    if lives > 0
+    if lives > 0 && fuel > 0
       move_left if window.button_down? Gosu::KbLeft
       move_right if window.button_down? Gosu::KbRight
       go if window.button_down? Gosu::KbUp
