@@ -46,11 +46,11 @@ class Board
   #draw controls
   def draw_controls
     @controls.draw("controls:", 500, 225, 2)
-    @controls.draw("accelerate - ↑", 485, 255, 2)
-    @controls.draw("brake - ↓", 485, 280, 2)
-    @controls.draw("left,right - ← →", 485, 305, 2)
-    @controls.draw("beep - space", 485, 330, 2)
-    @controls.draw("add pass - alt", 485, 355, 2)
+    @controls.draw("move - ↑ ↓ ← →", 485, 255, 2)
+    @controls.draw("beep - space", 485, 280, 2)
+    @controls.draw("passenger - alt", 485, 305, 2)
+    @controls.draw("gear up - shift", 485, 330, 2)
+    @controls.draw("gear down - ctrl", 485, 355, 2)
     @controls.draw("quit - esc", 485, 380, 2)
   end
 
