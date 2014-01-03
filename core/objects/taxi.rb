@@ -103,13 +103,13 @@ class Taxi < Car
   def transmission
     if window.button_down? Gosu::KbLeftShift
       @gear += 1 if @g
-      @gear = 4 if @gear >= 4
       @g = false
     elsif window.button_down? Gosu::KbLeftControl
       @gear -= 1 if @g
-      @gear = 1 if @gear <= 1
       @g = false
     end
+    @gear = 4 if @gear >= 4
+    @gear = 1 if @gear <= 1
     if ((Time.now.to_i - @last_gear) == 10)
       @g = true
       @last_gear = Time.now.to_i
