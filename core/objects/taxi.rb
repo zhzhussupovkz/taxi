@@ -52,7 +52,7 @@ class Taxi < Car
       @acc.play(looping = true)
       @distance += 10
       if @distance % 1000 == 0
-        @fuel -= (2.0 * gear)
+        @fuel -= (0.5 * gear)
         if @fuel <= 0
           @fuel = 0
           game_over
