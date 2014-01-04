@@ -85,12 +85,12 @@ class World
       @pass.update
       @prize.update
       @drivers.each do |e|
-      if (e.x - @taxi.x).abs <= 15.0 && (e.y - @taxi.y).abs <= 15.0
-        @drivers.each do |d| d.add_injury end
-        @taxi.add_injury
-        @drivers.each do |d| d.repair end
+        if (e.x - @taxi.x).abs <= 15.0 && (e.y - @taxi.y).abs <= 15.0
+          @drivers.each do |d| d.add_injury end
+          @taxi.add_injury
+          @drivers.each do |d| d.repair end
+        end
       end
-    end
     rescue Exception => e
       puts "#{e.class}: #{e.message}"
     end
