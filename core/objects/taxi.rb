@@ -58,8 +58,8 @@ class Taxi < Car
           game_over
         end
         if @pass == true
-          @money += 10
-          @score += 100
+          @money += (10 * gear)
+          @score += (100 * gear)
           window.world.pass.cab_ride
         end
       end
@@ -137,20 +137,20 @@ class Taxi < Car
   def refuel
     @fuel += 10
     @fuel = 100 if @fuel >= 100
-    @score += 3
+    @score += (3 * gear)
   end
 
   #repair auto
   def repair
     @damage += 10
     @damage = 100 if @damage >= 100
-    @score += 5
+    @score += (5 * gear)
   end
 
   #add money
   def coin
     @money += 5
-    @score += 10
+    @score += (10 * gear)
   end
 
   #collect prizes
