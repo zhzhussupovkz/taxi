@@ -36,7 +36,8 @@ class Board
       draw_controls
       time = (Time.at(Time.now.to_i - window.st - 3600*6)).strftime("%H:%M:%S")
       @ui.draw("Time: " + time.to_s, 495, 435, 2)
-      @ui.draw("Copyright (c) 2013 by zhzhussupovkz", 445, 450, 2)
+      year = (Time.at(Time.now.to_i)).strftime("%Y")
+      @ui.draw("Copyright (c) #{year} by zhzhussupovkz", 445, 450, 2)
       @ui.draw("Icons by http://findicons.com", 460, 465, 2)
     rescue Exception => e
       puts "#{e.class}: #{e.message}"
