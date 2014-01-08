@@ -2,7 +2,7 @@
 =begin
 /**
 * @author zhzhussupovkz@gmail.com
-* @copyright (c) 2013 Zhussupov Zhassulan zhzhussupovkz@gmail.com
+* @copyright (c) 2014 Zhussupov Zhassulan zhzhussupovkz@gmail.com
 */
 =end
 #Board
