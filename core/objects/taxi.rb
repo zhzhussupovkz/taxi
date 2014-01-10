@@ -176,7 +176,11 @@ class Taxi < Car
 
   #add injury
   def add_injury
-    @damage -= (2.0 * gear)
+    if window.button_down? Gosu::KbUp
+      @damage -= (2.0 * gear)
+    else
+      @damage -= 2.0
+    end
     @x += 20.0
     @y += 15.0
     if @damage <= 0
