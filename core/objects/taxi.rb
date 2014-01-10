@@ -16,6 +16,7 @@ class Taxi < Car
       @acc = Gosu::Song.new(window, 'sounds/acc.ogg')
       @door = Gosu::Song.new(window, 'sounds/door.ogg')
       @crash = Gosu::Song.new(window, 'sounds/crash.ogg')
+      @collect = Gosu::Song.new(window, 'sounds/collect.ogg')
       @game_over = Gosu::Font.new(window, 'Monaco', 30)
       @pass = @dead = false
       @gear = 1
@@ -49,6 +50,7 @@ class Taxi < Car
   def go
     begin
       super
+      @acc.volume = 0.1
       @acc.play(looping = true)
       @distance += 10
       if @distance % 1000 == 0
@@ -75,7 +77,7 @@ class Taxi < Car
   #brake
   def brake
     super
-    @acc.stop
+    #@acc.stop
   end
 
   #beep
@@ -157,6 +159,8 @@ class Taxi < Car
   def collect_prizes
     if (window.world.prize.x - @x).abs <= 15.0 && (window.world.prize.y - @y).abs <= 15.0 && (window.world.prize.drawing == true)
       window.world.prize.drawing = false
+      @acc.stop if @acc.playing?
+      @collect.play(looping = false)
       @last_prize = Time.now.to_i
       case window.world.prize.type
       when 'fuel'
