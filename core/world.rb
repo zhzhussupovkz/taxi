@@ -17,6 +17,7 @@ class World
       @pass = Passenger.new(self, 347.5, 25)
       @prize = Prize.new(window)
       @trees, @houses, @drivers = [], [], []
+      @ui = Gosu::Font.new(window, 'Monaco', 40)
     rescue Exception => e
       puts "#{e.class}: #{e.message}"
     end
@@ -56,6 +57,7 @@ class World
   #draw
   def draw
     begin
+      @ui.draw("PAUSE", 225, 200, 4) if window.pause
       @bg.draw(0, 0, 0)
       @road.draw
       @trees.each do |e| e.draw end
