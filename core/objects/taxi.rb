@@ -77,7 +77,7 @@ class Taxi < Car
   #brake
   def brake
     super
-    #@acc.stop
+    @acc.stop
   end
 
   #beep
