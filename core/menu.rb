@@ -15,6 +15,7 @@ class Menu
     @new = Gosu::Image.new(window, 'images/menu/new.png', true)
     @exit = Gosu::Image.new(window, 'images/menu/exit.png', true)
     @cursor = Gosu::Image.new(@window, 'images/menu/cursor.png')
+    @beep = Gosu::Song.new(window, 'sounds/beep.ogg')
     @c = Gosu::Font.new(window, 'Monaco', 20)
   end
 
@@ -50,6 +51,7 @@ class Menu
 
   #new game button click event
   def new_game
+    @beep.play(looping = false)
     @display = false
     @window.pause = false
   end
