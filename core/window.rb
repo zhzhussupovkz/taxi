@@ -13,24 +13,28 @@ class GameWindow < Gosu::Window
     super 640, 480, false
     self.caption = 'Taxi Game'
     begin
+      @menu = Menu.new(self)
       @world = World.new(self)
       @st = Time.now.to_i
-      @pause = false
+      @pause = true
       @world.start
     rescue Exception => e
       puts "#{e.class}: #{e.message}"
     end
   end
 
-  attr_reader :st, :world, :pause
+  attr_reader :st, :world
+  attr_accessor :pause
 
   #draw
   def draw
-    @world.draw
+    @menu.draw
+    @world.draw if @menu.display === false
   end
 
   #game logic
   def update
+    @menu.update if pause
     @world.update if not pause
   end
 

@@ -14,6 +14,7 @@ require_relative "core/objects/passenger"
 require_relative "core/objects/prize"
 require_relative "core/world"
 require_relative "core/board"
+require_relative "core/menu"
 require_relative "core/window"
 
 GameWindow.instance.show
