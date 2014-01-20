@@ -14,10 +14,7 @@ class GameWindow < Gosu::Window
     self.caption = 'Taxi Game'
     begin
       @menu = Menu.new(self)
-      @world = World.new(self)
-      @st = Time.now.to_i
-      @pause = true
-      @world.start
+      new_game
     rescue Exception => e
       puts "#{e.class}: #{e.message}"
     end
@@ -38,11 +35,20 @@ class GameWindow < Gosu::Window
     @world.update if not pause
   end
 
+  #new game
+  def new_game
+    @world = World.new(self)
+    @st = Time.now.to_i
+    @pause = true
+    @world.start
+  end
+
   #button down event
   def button_down(key)
     case key
     when Gosu::KbEscape
-      close
+      @menu.display = !@menu.display
+      @pause = !@pause
     when Gosu::KbP
       @pause = !@pause
     end

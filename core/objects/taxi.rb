@@ -51,7 +51,7 @@ class Taxi < Car
     begin
       super
       @acc.volume = 0.1
-      @acc.play(looping = true) if Time.now.to_i >= @last_prize + 2
+      @acc.play(looping = true) if Time.now.to_i >= @last_prize + 2 || @window.pause == false
       @distance += 10
       if @distance % 1000 == 0
         @fuel -= (0.5 * gear)

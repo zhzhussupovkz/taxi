@@ -51,6 +51,7 @@ class Menu
 
   #new game button click event
   def new_game
+    @window.new_game
     @beep.play(looping = false)
     @display = false
     @window.pause = false
